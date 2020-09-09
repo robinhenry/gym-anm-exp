@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-which python
-python3 run.py ppo --env pendulum-v0 \
-                    --n_envs 10 \
+python3 run.py ppo  --env anm \
+                    --n_envs 8 \
                     --seed 2020 \
                     --num-episodes 100000 \
                     -T 1000 \

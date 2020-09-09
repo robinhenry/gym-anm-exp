@@ -3,7 +3,7 @@
 #!/usr/bin/env bash
 
 cd ..
-python3 robin/run.py ddpg --env pendulum-v0 \
+python3 robin/run.py ddpg --env anm \
                           --seed 2020 \
                           --num-episodes 100 \
                           -T 1000 \
