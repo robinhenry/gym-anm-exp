@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python3 run.py ppo  --env anm \
+nice -n 5 python3 run.py ppo  --env anm \
                     --n_envs 8 \
                     --seed 2020 \
                     --num-episodes 100000 \
