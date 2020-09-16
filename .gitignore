@@ -130,6 +130,6 @@ dmypy.json
 
 
 .idea
-results
-plots
-saves
+results/
+plots/
+saves/
