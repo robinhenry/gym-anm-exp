@@ -4,28 +4,20 @@ import time
 import gym
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
 import seaborn as sns
 
-import agents
-from utils.multiprocessing_env import SubprocVecEnv
+from rrl import agents
+from rrl.utils.multiprocessing_env import SubprocVecEnv
 from parse_args import parse_arguments
 from constants import ENVIRONMENTS
+from utils import get_plot_filename, get_result_filename, plot_training_curve, \
+    get_save_agent_filename
 
 sns.set()
 
 VERBOSE = True
 
-def get_result_filename(env, algo, name, seed):
-    return f'results/{env}-{algo}-{name}-{seed}.csv'
-
-
-def get_save_agent_filename(env, algo, name, seed):
-    return f'saves/{env}-{algo}-{name}-{seed}.pkl'
-
-
-def get_plot_filename(env, algo, name, seed):
-    return f'plots/{env}-{algo}-{name}-{seed}.png'
+AGENTS_REQUIRING_EVAL_ENV = (agents.PPO,)
 
 
 def main():
@@ -130,29 +122,6 @@ def main():
     print('Mean training time per frame: {:.3f}'.format(time_per_frame))
 
 
-def plot_training_curve(results, filepath):
-    """
-    Save a plot of the performance evaluated over training.
-
-    Parameters
-    ----------
-    - results : pd.DataFrame
-        The results loaded from the results file.
-    - filepath : str
-        The file to which to save the plot.
-    """
-
-    # Cum return vs. timesteps.
-    fig, ax = plt.subplots(figsize=(20, 5))
-    x = results['n_frames']
-    y = results['mean_return']
-    ax.plot(x, y, label=results['algo'][0])
-    ax.fill_between(x, y - results['std_return'], y + results['std_return'], alpha=0.4)
-    fig.savefig(filepath, bbox_inches='tight')
-
-    plt.close(fig)
-
-
 def make_env(env_id, masked, render, n_envs):
     """
     Create a (vectorized) environment and a standard environment for evaluation.
@@ -215,7 +184,13 @@ def evaluate(agent, eval_env, num_rollouts, num_steps, verbose=False):
     performances = []
 
     for n in range(num_rollouts):
-        performance, _ = agent.eval(num_steps, eval_env=eval_env)
+
+        # Pass evaluation env to certain agents only.
+        if isinstance(agent, AGENTS_REQUIRING_EVAL_ENV):
+            performance, _ = agent.eval(num_steps, eval_env=eval_env)
+        else:
+            performance, _ = agent.eval(num_steps)
+
         performances.append(performance)
 
     if verbose:

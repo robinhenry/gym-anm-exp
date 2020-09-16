@@ -1,7 +1,6 @@
 import argparse
 
-import agents
-import networks
+from rrl import agents, networks
 from constants import ENVIRONMENTS
 
 
