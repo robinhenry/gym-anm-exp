@@ -44,7 +44,7 @@ set_random_seed(seed)
 n_eval_episodes = 20
 eval_freq = int(1e3)
 max_steps_per_eval_episode = 3 * int(1e3)
-log_path = './td3_' + str(seed) + '/'
+log_path = './results/td3_' + str(seed) + '/'
 eval_callback = EvalCallback(eval_env, best_model_save_path=log_path,
                              log_path=log_path, eval_freq=eval_freq,
                              deterministic=True, render=False,
@@ -67,3 +67,4 @@ total_time = time.time() - start
 
 print('Time elapsed to train for %d timesteps: %s.' % (train_timesteps,
                                                        total_time))
+
