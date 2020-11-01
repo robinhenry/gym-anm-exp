@@ -1,12 +1,11 @@
 import gym
-import numpy as np
 import argparse
 import time
 
-from stable_baselines3 import DDPG
-from stable_baselines3.ddpg.policies import MlpPolicy
-from stable_baselines3.common.noise import NormalActionNoise
+from stable_baselines3 import PPO
+from stable_baselines3.ppo.policies import MlpPolicy
 from stable_baselines3.common import set_random_seed
+from stable_baselines3.common.cmd_util import make_vec_env
 
 from custom_evaluation import EvalCallback
 
@@ -32,7 +31,7 @@ env_id = 'gym_anm:ANM6Easy-v0'
 gamma = 0.995
 
 # Separate environments for training and evaluation.
-env = gym.make(env_id)
+env = make_vec_env(env_id, n_envs=4, seed=seed)
 eval_env = gym.make(env_id)
 
 # Set all random seeds.
@@ -44,7 +43,7 @@ set_random_seed(seed)
 n_eval_episodes = 20
 eval_freq = int(1e3)
 max_steps_per_eval_episode = 3 * int(1e3)
-log_path = './results/ddpg_' + str(seed) + '/'
+log_path = './results/ppo_' + str(seed) + '/'
 eval_callback = EvalCallback(eval_env, best_model_save_path=log_path,
                              log_path=log_path, eval_freq=eval_freq,
                              deterministic=True, render=False,
@@ -52,13 +51,8 @@ eval_callback = EvalCallback(eval_env, best_model_save_path=log_path,
                              max_steps_per_episode=max_steps_per_eval_episode,
                              gamma=gamma)
 
-# The noise objects for TD3
-n_actions = env.action_space.shape[-1]
-action_noise = NormalActionNoise(mean=np.zeros(n_actions), sigma=0.1 * np.ones(n_actions))
-
 # Initialize the model.
-model = DDPG(MlpPolicy, env, action_noise=action_noise, gamma=gamma, verbose=1,
-             seed=seed)
+model = PPO(MlpPolicy, env, gamma=gamma, verbose=1, seed=seed)
 
 # Train the model.
 start = time.time()

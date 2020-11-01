@@ -1,0 +1,9 @@
+
+0. Train TD3 for 10 random seeds (started on 26/09 at 19:00).
+1. Train DDPG for 10 random seeds.
+2. Train PPO for 10 random seeds.
+3. Train SAC for 10 random seeds.
+4. Train A2C for 10 random seeds.
+
+SEEDS USED (which ran to completion):
+TD3: 2022, 2023, 2025, 20027, 2029, 2030, 2031, 2032,2035.

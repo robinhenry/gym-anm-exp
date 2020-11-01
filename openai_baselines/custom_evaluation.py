@@ -87,7 +87,6 @@ def evaluate_policy(
     return mean_reward, std_reward
 
 
-
 class EvalCallback(EventCallback):
     """
     Callback for evaluating an agent.
