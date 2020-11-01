@@ -12,18 +12,23 @@ parser.add_argument('-s', '--seed', type=int, help='the random seed')
 args = parser.parse_args()
 
 # Load run data.
-log_path = 'results/' + args.algo + '_' + args.seed + '/evaluations.npz'
-results = np.load(log_path)
+log_folder = 'results/' + args.algo + '_' + args.seed + '/'
+results = np.load(log_folder + 'evaluations.npz')
 timesteps = results['timesteps']
 ep_lengths = results['ep_lengths']
 results = results['results']
 
-print(results[:5])
-print(ep_lengths[:5])
-print(timesteps[:5])
+# Mean and std of returns.
+mean = np.mean(results, axis=1)
+std = np.std(results, axis=1)
 
 # Plot run data.
 fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-ax.plot(timesteps, results)
+ax.plot(timesteps, mean)
+ax.fill_between(timesteps, mean - std, mean + std, alpha=0.4)
 ax.set_xlabel('Timesteps')
 ax.set_ylabel('Return')
+
+# Save and close the figure.
+fig.savefig(log_folder + 'training_curves.png')
+plt.close(fig)
