@@ -1,4 +1,4 @@
 
 1. Open screen: screen
 2. Run the following, changing the script name and the seed:
-    conda activate anm; nice -n 12 python td3.py -s 2022 -T 5000000
+    conda activate anm; nice -n 12 python td3.py -s 2022 -T 5000000 -e gym-anm
