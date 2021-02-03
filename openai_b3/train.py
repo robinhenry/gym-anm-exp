@@ -1,21 +1,33 @@
 from stable_baselines3.common.utils import set_random_seed
+from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO
 
 from openai_b3.hyperparameters import *
 from openai_b3.callbacks import ProgressBarManager, EvalCallback
-from openai_b3.utils import make_envs, save_hyperparameters
+from openai_b3.utils import make_envs, save_hyperparameters, parse_args
 
 
-# Overwrite hyperparameters.
-ALGO = PPO
+# Read command line arguments.
+args = parse_args()
+SEED = args.seed
+
+if args.agent == 'PPO':
+    ALGO = PPO
+elif args.agent == 'SAC':
+    ALGO = SAC
+else:
+    raise ValueError('Unimplemented agent ' + args.agent)
 
 # Write parameters to .txt file in log directory.
 PARAMS = {
+    'SEED': SEED,
     'ENV_ID': ENV_ID,
     'LOG_DIR': LOG_DIR,
     'MAX_TRAINING_EP_LENGTH': MAX_TRAINING_EP_LENGTH,
     'EVAL_FREQ': EVAL_FREQ,
     'N_EVAL_EPISODES': N_EVAL_EPISODES,
+    'TENSORBOARD_LOG': TENSORBOARD_LOG,
+    'TB_LOG_NAME': TB_LOG_NAME,
     'POLICY': POLICY,
     'ALGO': ALGO.__name__,
     'TRAIN_STEPS': TRAIN_STEPS,

@@ -13,13 +13,14 @@ ALGO = SAC
 PARAMS = {
     'ENV_ID': ENV_ID,
     'LOG_DIR': LOG_DIR,
+    'MAX_TRAINING_EP_LENGTH': MAX_TRAINING_EP_LENGTH,
     'EVAL_FREQ': EVAL_FREQ,
     'N_EVAL_EPISODES': N_EVAL_EPISODES,
     'POLICY': POLICY,
     'ALGO': ALGO.__name__,
     'TRAIN_STEPS': TRAIN_STEPS,
     'GAMMA': GAMMA,
-    'MAX_EVAL_STEPS_PER_EPISODE ': MAX_EVAL_STEPS_PER_EPISODE,
+    'MAX_EVAL_EP_LENGTH': MAX_EVAL_EP_LENGTH,
 }
 save_hyperparameters(LOG_DIR, PARAMS)
 
@@ -27,7 +28,7 @@ save_hyperparameters(LOG_DIR, PARAMS)
 set_random_seed(SEED)
 
 # Environments
-train_env, eval_env = make_envs(ENV_ID, LOG_DIR, GAMMA, MAX_EVAL_STEPS_PER_EPISODE, SEED)
+train_env, eval_env = make_envs(ENV_ID, LOG_DIR, GAMMA, MAX_TRAINING_EP_LENGTH, MAX_EVAL_EP_LENGTH, SEED)
 
 # Callbacks
 eval_callback = EvalCallback(eval_env, best_model_save_path=LOG_DIR,
@@ -37,7 +38,7 @@ eval_callback = EvalCallback(eval_env, best_model_save_path=LOG_DIR,
 callbacks = [eval_callback]
 
 # Agent
-model = ALGO(POLICY, train_env, verbose=0, tensorboard_log=TENSORBOARD_LOG)
+model = ALGO(POLICY, train_env, gamma=GAMMA, verbose=0, tensorboard_log=TENSORBOARD_LOG)
 
 # Train agent
 with ProgressBarManager(TRAIN_STEPS) as c:
