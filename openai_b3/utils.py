@@ -41,6 +41,8 @@ def load_training_env(env_id, env_path, log_dir, max_train_ep_length, seed):
     env = DummyVecEnv([lambda: env])                  # Vectorize environment
     env = VecNormalize.load(env_path, env)
 
+    env.reset()
+
     return env
 
 

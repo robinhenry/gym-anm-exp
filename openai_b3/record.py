@@ -3,8 +3,11 @@ import base64
 from pathlib import Path
 from IPython import display as ipythondisplay
 from stable_baselines3.common.vec_env import VecVideoRecorder
+from stable_baselines3.sac import SAC
+from stable_baselines3.ppo import PPO
 
-from openai_b3.hyperparameters import ENV_ID, LOG_DIR, ALGO
+from openai_b3.hyperparameters import ENV_ID
+from openai_b3.utils import parse_args, load_visualization_env
 
 os.system("Xvfb :1 -screen 0 1024x768x24 &")
 os.environ['DISPLAY'] = ':1'
@@ -27,7 +30,7 @@ def show_videos(video_path='', prefix=''):
     ipythondisplay.display(ipythondisplay.HTML(data="<br>".join(html)))
 
 
-def record_video(eval_env, model, video_length=500, prefix='', video_folder='videos/'):
+def record_video(env, model, video_length=500, prefix='', video_folder='videos/'):
     """
     :param eval_env: (DummyVecEnv)
     :param model: (RL model)
@@ -36,7 +39,7 @@ def record_video(eval_env, model, video_length=500, prefix='', video_folder='vid
     :param video_folder: (str)
     """
     # Start the video at step=0 and record 500 steps
-    eval_env = VecVideoRecorder(eval_env, video_folder=video_folder,
+    eval_env = VecVideoRecorder(env, video_folder=video_folder,
                                 record_video_trigger=lambda step: step == 0, video_length=video_length,
                                 name_prefix=prefix)
 
@@ -53,10 +56,23 @@ if __name__ == '__main__':
 
     RECORD_STEPS = 500
 
-    # Load trained model.
-    model = ALGO.load(LOG_DIR + '/best_model', verbose=1)
-    print("n_steps =", model.n_steps)
+    args = parse_args()
+    if args.agent == 'PPO':
+        ALGO = PPO
+    elif args.agent == 'SAC':
+        ALGO = SAC
+    else:
+        raise ValueError('Unimplemented agent ' + args.agent)
 
-    video_folder = LOG_DIR + '/videos'
-    record_video(ENV_ID, model, video_length=RECORD_STEPS, prefix='', video_folder=video_folder)
+    p = '/Users/uni/Dev/gym-anm_exps/analyse_results/results/sac/run_0/'
+
+    # Load trained model.
+    model = ALGO.load(p + 'best_model', verbose=1)
+    # print("n_steps =", model.n_steps)
+
+    # Load saved vec env
+    env = load_visualization_env(ENV_ID, os.path.join(p, 'training_vec_env'), 1)
+
+    video_folder = p + 'videos/'
+    record_video(env, model, video_length=RECORD_STEPS, prefix='', video_folder=video_folder)
     show_videos(video_folder, prefix='')
