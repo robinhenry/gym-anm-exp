@@ -15,8 +15,7 @@ for run_folder in run_folders:
     p = os.path.join(FOLDER, run_folder, 'evaluations.npz')
     if not os.path.exists(p):
         continue
-
-    data = np.load(p)
+    
     timestep = data['timesteps'][-1]
     result = data['results'][-1, 0, 0]
     disc_result = data['discounted_results'][-1, 0, 0]
@@ -37,3 +36,5 @@ for run_folder in run_folders:
     print(f'RUN_ID: {run_id}, ALGO: {algo}, timestep={timestep}, return={result:.1f}, disc_return={disc_result:.1f}, '
           f'ep_length={ep_length}, t={float(t)/3600:.1f} hours')
 
+if __name__ == '__main__':
+    print('Done.')

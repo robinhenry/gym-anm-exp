@@ -7,6 +7,7 @@ from openai_b3.wrappers import NormalizeActionWrapper, TimeLimitWrapper
 
 
 def make_envs(env_id, log_dir, gamma, max_train_ep_length, max_eval_ep_length, seed):
+    """Make training and evaluation environments (vectorized envs)."""
 
     # Training env
     train_env = gym.make(env_id)
@@ -30,7 +31,24 @@ def make_envs(env_id, log_dir, gamma, max_train_ep_length, max_eval_ep_length, s
     return train_env, eval_env
 
 
+def load_training_env(env_id, env_path, log_dir, max_train_ep_length, seed):
+    """Load a saved vectorized training env (used to continue training)."""
+    env = gym.make(env_id)
+    env.seed(seed)                                          # Set random seed
+    env = TimeLimitWrapper(env, max_train_ep_length)  # Limit length of training episodes
+    env = Monitor(env, log_dir)                       # Monitor training
+    env = NormalizeActionWrapper(env)                 # Normalize action space
+    env = DummyVecEnv([lambda: env])                  # Vectorize environment
+    env = VecNormalize.load(env_path, env)
+
+    return env
+
+
 def load_visualization_env(env_id, env_path, seed=0):
+    """
+    Create an environment using the saved statistics of the training vectorized
+    env (used to visualize performance).
+    """
     env = gym.make(env_id)
     env.seed(seed)
     env = Monitor(env)  # Used to ensure original action space is not modified by `NormalizeActionWrapper`
@@ -50,6 +68,7 @@ def save_hyperparameters(log_dir, params):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("agent", type=str, help="Agent to train")
+    parser.add_argument("--path", '-p', type=str, default=None, help='The path to the run to continue')
     parser.add_argument("--seed", '-s', type=int, help='Random seed', default=1)
 
     args = parser.parse_args()

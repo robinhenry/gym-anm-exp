@@ -57,9 +57,6 @@ with ProgressBarManager(TRAIN_STEPS) as c:
     callbacks += [c]
     model.learn(total_timesteps=TRAIN_STEPS, tb_log_name=TB_LOG_NAME, callback=callbacks)
 
-# Continue training.
-# model.learn(total_timesteps=10000, tb_log_name='second_run', reset_num_timesteps=false)
-
 
 if __name__ == '__main__':
     print('Done!')

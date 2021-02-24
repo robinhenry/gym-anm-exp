@@ -21,7 +21,7 @@ i = 0
 while os.path.isdir(LOG_DIR + f'run_{i}/'):
     i += 1
 LOG_DIR += f'run_{i}/'
-os.makedirs(LOG_DIR)
+os.makedirs(LOG_DIR, exist_ok=True)
 
 TENSORBOARD_LOG = LOG_DIR + 'tensorboard/'
 os.makedirs(TENSORBOARD_LOG, exist_ok=True)
