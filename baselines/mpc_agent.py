@@ -3,8 +3,7 @@ from baselines.run_baseline import run_baseline
 
 
 def mpc_grid_search():
-
-    T = 2000
+    T = 3000
     seed = 1000
     savefile = f'./MPC_returns_T{T}.txt'
 
