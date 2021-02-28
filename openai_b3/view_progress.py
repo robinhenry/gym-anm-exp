@@ -2,7 +2,8 @@ import os
 import numpy as np
 
 
-FOLDER = '/Users/uni/Dev/gym-anm_exps/analyse_results/results/gym_anm:ANM6Easy-v0/'
+FOLDER = '/home/rhenry/gym_results/gym_anm:ANM6Easy-v0/'
+
 run_folders = os.listdir(FOLDER)
 print(run_folders)
 
