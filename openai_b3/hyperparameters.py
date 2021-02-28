@@ -12,7 +12,7 @@ EVAL_FREQ = 5000
 N_EVAL_EPISODES = 5
 MAX_EVAL_EP_LENGTH = 3000
 
-BASE_DIR = '/Volumes/Eluteng/gym/'
+BASE_DIR = '/home/rhenry/gym_results/'
 LOG_DIR = BASE_DIR + ENV_ID + '/'
 os.makedirs(LOG_DIR, exist_ok=True)
 
