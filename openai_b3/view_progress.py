@@ -3,6 +3,7 @@ import numpy as np
 
 
 FOLDER = '/home/rhenry/gym_results/gym_anm:ANM6Easy-v0/'
+
 run_folders = os.listdir(FOLDER)
 print(run_folders)
 
@@ -23,8 +24,6 @@ for run_folder in run_folders:
     p = os.path.join(FOLDER, run_folder, 'monitor.csv')
     with open(p, 'r') as f:
         r, l, t = f.readlines()[-1].split(',')
-        if t == 't\n':
-            continue
 
     # Load name of algo from `hyperparameters.txt`.
     p = os.path.join(FOLDER, run_folder, 'hyperparameters.txt')
@@ -38,4 +37,3 @@ for run_folder in run_folders:
 
 if __name__ == '__main__':
     print('Done.')
-
