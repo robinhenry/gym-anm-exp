@@ -3,7 +3,7 @@ import argparse
 from stable_baselines3.common.vec_env import VecNormalize, DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 
-from openai_b3.wrappers import NormalizeActionWrapper, TimeLimitWrapper
+from .wrappers import NormalizeActionWrapper, TimeLimitWrapper
 
 
 def make_envs(env_id, log_dir, gamma, max_train_ep_length, max_eval_ep_length, seed):

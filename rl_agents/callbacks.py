@@ -8,7 +8,7 @@ import numpy as np
 from stable_baselines3.common.callbacks import BaseCallback, EventCallback
 from stable_baselines3.common.vec_env import DummyVecEnv, VecEnv, sync_envs_normalization
 
-from openai_b3.evaluation import evaluate_policy
+from .evaluation import evaluate_policy
 
 
 class ProgressBarCallback(BaseCallback):

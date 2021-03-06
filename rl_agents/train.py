@@ -2,9 +2,9 @@ from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO
 
-from openai_b3.hyperparameters import *
-from openai_b3.callbacks import ProgressBarManager, EvalCallback
-from openai_b3.utils import make_envs, save_hyperparameters, parse_args
+from .hyperparameters import *
+from .callbacks import ProgressBarManager, EvalCallback
+from .utils import make_envs, save_hyperparameters, parse_args
 
 
 # Read command line arguments.

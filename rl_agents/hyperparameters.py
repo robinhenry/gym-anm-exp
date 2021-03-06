@@ -1,6 +1,7 @@
 import os
 
 
+BASE_DIR = './results/'
 ENV_ID = 'gym_anm:ANM6Easy-v0'
 GAMMA = 0.995
 
@@ -12,7 +13,6 @@ EVAL_FREQ = 10000
 N_EVAL_EPISODES = 5
 MAX_EVAL_EP_LENGTH = 3000
 
-BASE_DIR = '/home/rhenry/gym_results/'
 LOG_DIR = BASE_DIR + ENV_ID + '/'
 os.makedirs(LOG_DIR, exist_ok=True)
 
