@@ -15,4 +15,6 @@ def mpc_grid_search():
 
 
 if __name__ == '__main__':
-    mpc_grid_search()
+    # mpc_grid_search()
+
+    run_baseline(MPCAgentANM6Easy, 0.96, 64, 3000, 1, '_.txt')

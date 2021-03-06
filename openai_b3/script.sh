@@ -4,9 +4,8 @@
 echo "Running in Conda env:" 
 which python
 
-# Run for 2 different random seeds
-for seed in {5..5}
+# Run for random seeds
+for seed in {1..$2}
 do
    python train.py $1 -s $seed &
 done
-
