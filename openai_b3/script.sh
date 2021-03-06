@@ -5,7 +5,7 @@ echo "Running in Conda env:"
 which python
 
 # Run for random seeds
-for seed in {1..$2}
+for seed in $(seq "$2")
 do
    python train.py $1 -s $seed &
 done
