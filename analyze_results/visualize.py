@@ -4,9 +4,9 @@ import argparse
 from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO
 
-from openai_b3.hyperparameters import ENV_ID
+from rl_agents.hyperparameters import ENV_ID
 
-from openai_b3.utils import load_visualization_env
+from rl_agents.utils import load_visualization_env
 
 
 def visualize(path, algo, T, sleep_time):
