@@ -1,4 +1,4 @@
-# gym-anm_exps
+# gym-anm-exp
 
 This repository contains the code used to obtain the experimental results presented in
 the paper introducing [`gym-anm`](https://github.com/robinhenry/gym-anm):
