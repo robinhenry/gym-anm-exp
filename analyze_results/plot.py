@@ -2,9 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-from stable_baselines3.common.monitor import load_results
-
-from analyse_results.plt_setup import set_rc_params
+from analyze_results.plt_setup import set_rc_params
 
 set_rc_params()
 FIGSIZE = (10, 4)
@@ -14,7 +12,7 @@ dc_opf_best = -11.038
 mpc_best = -6.369
 
 # Agent result folders.
-folder = '/Users/uni/Dev/gym-anm_exps/analyse_results/results/'
+folder = '/Users/uni/Dev/gym-anm_exps/analyze_results/results/'
 agent_groups = [['sac', 'sac2'], ['ppo']]
 
 # Load training stats.

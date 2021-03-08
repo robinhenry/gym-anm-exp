@@ -130,8 +130,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
 .idea
-results/
-plots/
-saves/
+analyze_results/figures
+analyze_results/results
+analyze_results/videos

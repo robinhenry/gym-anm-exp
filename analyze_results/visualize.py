@@ -38,9 +38,6 @@ def parse_args():
 
 
 if __name__ == '__main__':
-    # Path to log directory.
-    # p = '/Users/uni/Dev/gym-anm_exps/analyse_results/results/sac/run_0/'
-
     args = parse_args()
     if args.agent == 'PPO':
         ALGO = PPO

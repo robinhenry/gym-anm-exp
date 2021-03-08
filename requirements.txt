@@ -1,0 +1,6 @@
+python>=3.8
+gym_anm
+tqdm
+torch
+stable_baselines3
+tensorboard
