@@ -93,7 +93,7 @@ be achieved using tools like [QuickTime Player for Mac](https://libguides.rowan.
 ### MPC Policies
 Either MPC-based policies can be run with the following code:
 ``` 
-$ python mpc_policies.run_mpc <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
+$ python -m mpc_policies.run_mpc <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
 ```
 where `<POLICY>` can be either `constant` or `perfect`.
 
