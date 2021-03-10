@@ -4,7 +4,7 @@ trained with `train.py`.
 
 It accepts 3 command line arguments: ::
 
-    $ python continue_training.py <ALGO> -p <PATH> -s <SEED>
+    $ python -m rl_agents.continue_training <ALGO> -p <PATH> -s <SEED>
 
 where
 - <ALGO> is the RL algorithm to use in {SAC, PPO},
@@ -14,6 +14,7 @@ where
 
 All other hyperparameter values are taken from `hyperparameters.py`.
 """
+import os
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO
@@ -35,11 +36,11 @@ else:
     raise ValueError('Unimplemented agent ' + args.agent)
 
 # Re-create logging folders
-TENSORBOARD_LOG = LOG_DIR + 'tensorboard/'
+TENSORBOARD_LOG = os.path.join(LOG_DIR, 'tensorboard')
 
 # Paths to trained agent and training env
-ENV_PATH = LOG_DIR + 'training_vec_env'
-AGENT_PATH = LOG_DIR + 'best_model.zip'
+ENV_PATH = os.path.join(LOG_DIR, 'training_vec_env')
+AGENT_PATH = os.path.join(LOG_DIR, 'best_model.zip')
 
 # Set random seed
 set_random_seed(SEED)

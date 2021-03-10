@@ -17,8 +17,8 @@ The code is divided into two folders:
 The folder `rl_agents/` mainly contains helper functions, callbacks, and wrappers that
 were used alongside the [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) RL library:
 * `callbacks.py` contains callback functions useful for: 
-  * Display a progress bar (`ProgressBarCallback`), and
-  * Evaluate the agent's current policy (`EvalCallback`). This is a slightly modified version
+  * Displaying a progress bar (`ProgressBarCallback`), and
+  * Evaluating the agent's current policy (`EvalCallback`). This is a slightly modified version
     of the [original callback](https://github.com/DLR-RM/stable-baselines3/blob/master/stable_baselines3/common/callbacks.py#L261)
     that calls `evaluation.py` instead of the original evaluation function.
 * `continue_training.py` can be used to continue training an agent using a saved model.
@@ -55,8 +55,7 @@ In particular, you should specify the folder in which you want the results to be
 #### Training
 You can then start training your agent with:
 ```
-$ cd rl_agents/
-$ python train.py <ALGO> -s <SEED>
+$ python -m rl_agents.train <ALGO> -s <SEED>
 ```
 where `<ALGO>` can be either `SAC` or `PPO` and `<SEED>` is an optional random seed.
 
@@ -66,16 +65,14 @@ so as to create a new directory.
 #### Inspecting training status
 You can get an overview of the training status of your agents by running:
 ``` 
-$ cd rl_agents/
-$ python view_progress.py
+$ python -m rl_agents.view_progress
 ```
 which will print some statistics about the results saved in subfolders of `<BASE_DIR>/<ENV_ID>/`.
 
 #### Visualizing the performance of a trained agent
 You can watch a trained agent interact with the environment by running:
 ``` 
-$ cd analyze_results/
-$ python visualize.py <ALGO> -p <PATH> -s <SLEEP> -T <TIMESTEPS>
+$ python -m analyze_results.visualize <ALGO> -p <PATH> -s <SLEEP> -T <TIMESTEPS>
 ```
 where `<PATH>` is the path to the run folder (in the form `<BASE_DIR>/<ENV_ID>/run_<i>/`), `<SLEEP>` is
 the amount of seconds between updates of the rendering (default is 0.5), and `<TIMESTEPS>` is the number
@@ -84,8 +81,7 @@ of timesteps to run.
 #### Recording a video of your trained agent
 You can record videos of your trained agent by running:
 ``` 
-$ cd analyze_results/
-$ pytho record_screen.py <PATH> -l <LENGTH> --fps <FPS>
+$ python -m analyze_results.record_screen <PATH> -l <LENGTH> --fps <FPS>
 ```
 where `<PATH>` is the path to where you want to save the recording, `<LENGTH>` is the duration of the 
 recording (seconds) and `<FPS>` is the number of frames/seconds to make.
@@ -97,8 +93,7 @@ be achieved using tools like [QuickTime Player for Mac](https://libguides.rowan.
 ### MPC Policies
 Either MPC-based policies can be run with the following code:
 ``` 
-$ cd mpc_policies/
-$ python mpc.py <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
+$ python mpc_policies.run_mpc <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
 ```
 where `<POLICY>` can be either `constant` or `perfect`.
 

@@ -6,8 +6,9 @@ Usage
 -----
 To visualize a trained agent <ALGO> (SAC or PPO) saved in folder <PATH>,
 for <TIMESTEPS> timesteps, pausing for <SLEEP> seconds between each timesteps
-(to make it easier to visualize):
-    python visualize.py <ALGO> -p <PATH> -s <SLEEP> -T <TIMESTEPS>
+(to make it easier to visualize): ::
+
+    python -m analyze_results.visualize <ALGO> -p <PATH> -s <SLEEP> -T <TIMESTEPS>
 """
 import os
 import time
@@ -47,6 +48,7 @@ def visualize(path, algo, T, sleep_time):
         obs, _, dones, info = env.step(action)
         env.render()
         time.sleep(sleep_time)
+    env.close()
 
 
 def parse_args():

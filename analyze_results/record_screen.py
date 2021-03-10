@@ -4,7 +4,7 @@ for example, to record a video of a trained agent.
 
 Usage:
 ------
-    $ python record_screen.py <OUTPUT_FILE> -l <LENGTH> --fps <FPS>
+    $ python -m analyze_results.record_screen <OUTPUT_FILE> -l <LENGTH> --fps <FPS>
 """
 import cv2
 import argparse
@@ -44,7 +44,6 @@ def record(output_path, length, fps):
     out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
     start = time.time()
-
     while time.time() - start < length:
         try:
             img = pyautogui.screenshot()

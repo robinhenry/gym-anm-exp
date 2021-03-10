@@ -7,13 +7,13 @@ and repeats for a range of different MPC hyperparameters:
 The results (non-discounted and discounted returns) are saved in a single .txt file.
 
 For more information about MPC-based policies in `gym-anm`, see the official documentation at
-https://gym-anm.readthedocs.io/en/latest/topics/mpc.html. 
+https://gym-anm.readthedocs.io/en/latest/topics/mpc.html.
 
 Examples
 --------
 The script can be run as follows: ::
 
-    $ python run_mpc.py <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
+    $ python -m mpc_policies.run_mpc <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
 """
 
 import gym
@@ -46,6 +46,8 @@ def grid_search(env_id, policy, T, seed, savefile):
     savefile : str
         The path to the file in which to write the results.
     """
+    print('Using MPC policy: ' + policy.__name__ + f' with T={T}')
+
     for planning_steps in PLANNING_STEPS:
         for safety_margin in SAFETY_MARGINS:
 
@@ -75,8 +77,6 @@ def run_baseline(env_id, policy, safety_margin, planning_steps, T,
     savefile : str
         The path to the file in which to write the results.
     """
-
-    print('Using MPC policy: ' + policy.__name__ + f' with T={T}')
 
     # Get file to write results to.
     if savefile is None:
@@ -127,7 +127,7 @@ def parse_args():
     parser.add_argument('env', type=str, help='The environment ID')
     parser.add_argument('policy', type=str, help='Which MPC variant to run')
     parser.add_argument('-T', type=int, help='The number of timesteps to run', default=3000)
-    parser.add_argument('--seed', '-s', help='The random seed', default=None)
+    parser.add_argument('--seed', '-s', type=int, help='The random seed', default=None)
     parser.add_argument('--output', '-o', help='The file to write the results to',
                         default=None)
 

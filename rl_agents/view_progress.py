@@ -4,14 +4,13 @@ status of the agents you are training.
 
 Examples
 --------
-    $ python view_progress.py
+    $ python -m rl_agents.view_progress
 
 Notes
 -----
 The above example will use the <BASE_DIR> and <ENV_ID> variables from
 `hyperparameters.py` to construct the path to the trained agents.
 """
-
 import os
 import numpy as np
 
@@ -20,7 +19,7 @@ from .hyperparameters import BASE_DIR, ENV_ID
 
 FOLDER = os.path.join(BASE_DIR, ENV_ID)
 run_folders = os.listdir(FOLDER)
-print(run_folders)
+print('Run folders:', run_folders)
 
 for run_folder in run_folders:
     if run_folder[:3] != 'run':
@@ -47,8 +46,12 @@ for run_folder in run_folders:
             if 'ALGO' in line:
                 algo = line.split(':')[-1][:-1]
 
-    print(f'RUN_ID: {run_id}, ALGO: {algo}, timestep={timestep}, return={result:.1f}, disc_return={disc_result:.1f}, '
-          f'ep_length={ep_length}, t={float(t)/3600:.1f} hours')
+    if isinstance(t, str):
+        print(f'RUN_ID: {run_id}, ALGO: {algo}, the model performance has not been evaluated yet.')
+        continue
+
+    print(f'RUN_ID: {run_id}, ALGO: {algo}, last timestep={timestep}, last return={result:.1f}, last disc_return={disc_result:.1f}, '
+          f'last ep_length={ep_length}, t={float(t)/3600:.1f} hours')
 
 
 if __name__ == '__main__':

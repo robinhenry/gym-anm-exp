@@ -4,7 +4,7 @@ This file contains utility functions used to:
 - log hyperparameters to a .txt file,
 - parse command line arguments.
 """
-
+import os
 import gym
 import argparse
 from stable_baselines3.common.vec_env import VecNormalize, DummyVecEnv
@@ -70,9 +70,24 @@ def load_visualization_env(env_id, env_path, seed=0):
 
 def save_hyperparameters(log_dir, params):
     """Write the list of all hyperparameters to a .txt file in the run directory."""
-    with open(log_dir + 'hyperparameters.txt', 'w') as f:
+    with open(os.path.join(log_dir, 'hyperparameters.txt'), 'w') as f:
         for k in params.keys():
             f.write("'{}':'{}'\n".format(k, params[k]))
+
+
+def make_log_dirs(log_dir):
+    """Create new subdirectories in `log_dir` for this run."""
+    i = 0
+    while os.path.isdir(os.path.join(log_dir, f'run_{i}')):
+        i += 1
+    log_dir = os.path.join(log_dir, f'run_{i}')
+    os.makedirs(log_dir, exist_ok=True)
+
+    # Make tensorboard log directory within `log_dir`.
+    tensorboard_log = os.path.join(log_dir, 'tensorboard')
+    os.makedirs(tensorboard_log, exist_ok=True)
+
+    return log_dir, tensorboard_log
 
 
 def parse_args():

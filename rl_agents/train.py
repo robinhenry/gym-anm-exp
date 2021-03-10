@@ -4,7 +4,7 @@ the Stable Baselines3 implementations.
 
 It accepts 2 command line arguments: ::
 
-    $ python continue_training.py <ALGO> -s <SEED>
+    $ python -m rl_agents.continue_training <ALGO> -s <SEED>
 
 where
 - <ALGO> is the RL algorithm to use in {SAC, PPO},
@@ -18,7 +18,7 @@ from stable_baselines3.ppo import PPO
 
 from .hyperparameters import *
 from .callbacks import ProgressBarManager, EvalCallback
-from .utils import make_envs, save_hyperparameters, parse_args
+from .utils import make_envs, save_hyperparameters, parse_args, make_log_dirs
 
 
 # Read command line arguments.
@@ -31,6 +31,9 @@ elif args.agent == 'SAC':
     ALGO = SAC
 else:
     raise ValueError('Unimplemented agent ' + args.agent)
+
+# Make log directories.
+LOG_DIR, TENSORBOARD_LOG = make_log_dirs(LOG_DIR)
 
 # Write parameters to .txt file in log directory.
 PARAMS = {

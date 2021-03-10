@@ -10,7 +10,6 @@ import warnings
 from typing import Any, Dict, Optional, Union
 import gym
 import numpy as np
-
 from stable_baselines3.common.callbacks import BaseCallback, EventCallback
 from stable_baselines3.common.vec_env import DummyVecEnv, VecEnv, sync_envs_normalization
 
@@ -169,9 +168,9 @@ class EvalCallback(EventCallback):
             self.last_mean_reward = mean_reward
 
             if self.verbose > 0:
-                print(f"Eval num_timesteps={self.num_timesteps}, " f"episode_reward={mean_reward:.2f} +/- {std_reward:.2f} ",
+                print(f"Evaluation: num_timesteps={self.num_timesteps}, " f"episode_reward={mean_reward:.2f} +/- {std_reward:.2f}, ",
                       f'episode_discounted_reward={mean_discounted_reward:.2f} +/- {std_discounted_reward:.2f}')
-                print(f"Episode length: {mean_ep_length:.2f} +/- {std_ep_length:.2f}")
+                print(f"Evaluation: episode length={mean_ep_length:.2f} +/- {std_ep_length:.2f}")
             # Add to current Logger
             self.logger.record("eval/mean_ep_reward", float(mean_reward))
             self.logger.record("eval/mean_ep_length", mean_ep_length)
