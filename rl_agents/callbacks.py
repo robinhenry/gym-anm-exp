@@ -1,3 +1,9 @@
+"""
+This file contains callback functions that can be used with the Stable Baselines3
+library to monitor training of RL agents.
+
+For more information, see https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html.
+"""
 from tqdm.auto import tqdm
 import os
 import warnings
@@ -13,6 +19,8 @@ from .evaluation import evaluate_policy
 
 class ProgressBarCallback(BaseCallback):
     """
+    A callback to display a Progress Bar during training.
+
     :param pbar: (tqdm.pbar) Progress bar object
     """
 
@@ -28,6 +36,17 @@ class ProgressBarCallback(BaseCallback):
 
 # this callback uses the 'with' block, allowing for correct initialisation and destruction
 class ProgressBarManager(object):
+    """
+    A class that allows the use of the `with` keyword to display a training progress bar.
+
+    Example
+    -------
+    Using the progress bar manager to monitor training::
+
+        with ProgressBarManager(TRAIN_STEPS) as c:
+            model.learn(total_timesteps=TRAIN_STEPS, callback=[c])
+
+    """
     def __init__(self, total_timesteps):  # init object with total timesteps
         self.pbar = None
         self.total_timesteps = total_timesteps
@@ -46,6 +65,10 @@ class ProgressBarManager(object):
 class EvalCallback(EventCallback):
     """
     Callback for evaluating an agent.
+
+    This is a modified version of the original EvalCallback of Stable Baselines3
+    (https://stable-baselines3.readthedocs.io/en/master/guide/callbacks.html#evalcallback),
+    which calls a custom :code:`evaluate_policy()` function.
 
     :param eval_env: The environment used for initialization
     :param callback_on_new_best: Callback to trigger

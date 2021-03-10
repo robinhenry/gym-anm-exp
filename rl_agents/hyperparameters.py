@@ -1,5 +1,9 @@
-import os
+"""
+This file contains the hyperparameter values used for training and
+testing RL agents.
+"""
 
+import os
 
 BASE_DIR = './results/'
 ENV_ID = 'gym_anm:ANM6Easy-v0'

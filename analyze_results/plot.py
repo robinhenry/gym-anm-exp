@@ -1,3 +1,4 @@
+"""This script plots training curves of discounted returns."""
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -7,17 +8,12 @@ from analyze_results.plt_setup import set_rc_params
 set_rc_params()
 FIGSIZE = (10, 4)
 
-# Baseline best discounted rewards.
-dc_opf_best = -11.038
-mpc_best = -6.369
-
-# Agent result folders.
+# Path to folders containing training statistics.
 folder = '/Users/uni/Dev/gym-anm_exps/analyze_results/results/'
 agent_groups = [['sac', 'sac2'], ['ppo']]
 
 # Load training stats.
 eval_stats = {a: [] for a in [group[0] for group in agent_groups]}
-training_stats = {a: [] for a in [group[0] for group in agent_groups]}
 for agent_group in agent_groups:
     agent = agent_group[0]
 
@@ -43,17 +39,11 @@ for agent_group in agent_groups:
         d = np.array([timesteps, results, discounted_results, ep_lengths])
         eval_stats[agent].append(d)
 
-        # monitor.csv
-        # training_stats[agent].append(load_results(subdir))
 
 # Clean statistics.
 for agent, d in eval_stats.items():
     t_min = np.min([x.shape[1] for x in d])
     eval_stats[agent] = np.stack([x[:, :t_min] for x in d])
-
-# for agent, d in training_stats.items():
-#     t_min = np.min([x.shape[0] for x in d])
-#     training_stats[agent] = [x[:t_min] for x in d]
 
 # Plot discounted returns.
 fig, ax = plt.subplots(1, 1, figsize=FIGSIZE)
@@ -99,24 +89,6 @@ ax.set_ylabel('Non-discounted return (T=2000)')
 ax.legend(loc='lower right')
 
 fig.savefig('figures/nondiscounted_return.pdf', bbox_inches='tight')
-
-# Plot the evolution of episode length over training.
-# fig, ax = plt.subplots(1, 1, figsize=FIGSIZE)
-#
-# for agent, d in training_stats.items():
-#     training_lengths = [x['l'] for x in d]
-#     mu = np.mean(training_lengths, axis=0)
-#     std = np.std(training_lengths, axis=0)
-#
-#     ax.plot(mu, label=agent.upper())
-#     print(f'Longest episode for {agent}: ', np.max(mu))
-#
-# ax.set_xlabel('Training episode')
-# ax.set_ylabel('Episode length')
-# ax.legend(loc='lower right')
-#
-# fig.savefig('figures/training_ep_length.pdf', bbox_inches='tight')
-
 
 # plt.show()
 

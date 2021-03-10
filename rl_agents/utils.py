@@ -1,3 +1,10 @@
+"""
+This file contains utility functions used to:
+- initialize environments (for training, evaluation, and visualization),
+- log hyperparameters to a .txt file,
+- parse command line arguments.
+"""
+
 import gym
 import argparse
 from stable_baselines3.common.vec_env import VecNormalize, DummyVecEnv
@@ -62,12 +69,14 @@ def load_visualization_env(env_id, env_path, seed=0):
 
 
 def save_hyperparameters(log_dir, params):
+    """Write the list of all hyperparameters to a .txt file in the run directory."""
     with open(log_dir + 'hyperparameters.txt', 'w') as f:
         for k in params.keys():
             f.write("'{}':'{}'\n".format(k, params[k]))
 
 
 def parse_args():
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument("agent", type=str, help="Agent to train")
     parser.add_argument("--path", '-p', type=str, default=None, help='The path to the run to continue')

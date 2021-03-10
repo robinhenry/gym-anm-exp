@@ -1,3 +1,17 @@
+"""
+This script can be used to train PPO or SAC RL agents using
+the Stable Baselines3 implementations.
+
+It accepts 2 command line arguments: ::
+
+    $ python continue_training.py <ALGO> -s <SEED>
+
+where
+- <ALGO> is the RL algorithm to use in {SAC, PPO},
+- <SEED> is a random seed.
+
+All other hyperparameter values are taken from `hyperparameters.py`.
+"""
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO

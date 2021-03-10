@@ -1,3 +1,9 @@
+"""
+This file contains a custom `evaluate_policy()` function, which is a modified
+version of the Stable Baselines3 original function
+(https://stable-baselines3.readthedocs.io/en/master/common/evaluation.html#stable_baselines3.common.evaluation.evaluate_policy)
+which also computes discounted returns.
+"""
 from typing import Callable, List, Optional, Tuple, Union
 import gym
 import numpy as np

@@ -1,5 +1,6 @@
-import matplotlib.pyplot as plt
+"""This file contains a function to setup Matplotlib parameters."""
 
+import matplotlib.pyplot as plt
 
 def set_rc_params():
     # Plot parameters.

@@ -1,9 +1,15 @@
+"""
+This file contains a series of wrapper classes used to wrap
+gym environments.
+"""
 import gym
 import numpy as np
 
 
 class NormalizeActionWrapper(gym.Wrapper):
     """
+    This class normalizes the action space of the environment to [-1, 1]^N.
+
     :param env: (gym.Env) Gym environment that will be wrapped
     """
 
@@ -50,6 +56,10 @@ class NormalizeActionWrapper(gym.Wrapper):
 
 class TimeLimitWrapper(gym.Wrapper):
     """
+    This class imposes a maximum number of timesteps that can be taken in the
+    environment before a `env.reset()` is required (at which point
+    `done=True` is returned).
+
     :param env: (gym.Env) Gym environment that will be wrapped
     :param max_steps: (int) Max number of steps per episode
     """

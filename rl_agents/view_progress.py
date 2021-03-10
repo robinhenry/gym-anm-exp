@@ -1,3 +1,17 @@
+"""
+This script can be used to display some statistics about the training
+status of the agents you are training.
+
+Examples
+--------
+    $ python view_progress.py
+
+Notes
+-----
+The above example will use the <BASE_DIR> and <ENV_ID> variables from
+`hyperparameters.py` to construct the path to the trained agents.
+"""
+
 import os
 import numpy as np
 

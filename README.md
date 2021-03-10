@@ -40,6 +40,14 @@ The script `run_mpc.py` can be used to run either the
 planning steps N (optimization horizon) and safety margin hyperparameters &beta;. 
 
 ## Running The Code
+
+### Installation & Requirements
+Running the code in this repository requires `Python>=3.8` and the packages listed in `requirements.txt`, which 
+can be installed as follows:
+```
+$ pip install -r requirements.txt
+```
+
 ### RL Agents
 Before starting training the agents, you may want to modify certain hyperparameters in `rl_agents/hyperparameters.py`.
 In particular, you should specify the folder in which you want the results to be stored `BASE_DIR`.

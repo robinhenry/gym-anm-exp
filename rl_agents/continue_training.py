@@ -1,3 +1,19 @@
+"""
+This script can be used to continue training a saved agent previously
+trained with `train.py`.
+
+It accepts 3 command line arguments: ::
+
+    $ python continue_training.py <ALGO> -p <PATH> -s <SEED>
+
+where
+- <ALGO> is the RL algorithm to use in {SAC, PPO},
+- <PATH> is a path to the directory in which the agent was
+  saved (same as `LOG_DIR` in `hyperparameters.py`),
+- <SEED> is a random seed.
+
+All other hyperparameter values are taken from `hyperparameters.py`.
+"""
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.sac import SAC
 from stable_baselines3.ppo import PPO

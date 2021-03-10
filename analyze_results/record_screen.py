@@ -1,3 +1,11 @@
+"""
+This script can be used to record the active screen. It can be used,
+for example, to record a video of a trained agent.
+
+Usage:
+------
+    $ python record_screen.py <OUTPUT_FILE> -l <LENGTH> --fps <FPS>
+"""
 import cv2
 import argparse
 import numpy as np
@@ -7,6 +15,18 @@ import time
 
 
 def record(output_path, length, fps):
+    """
+    Record the currently active screen.
+
+    Parameters
+    ----------
+    output_path : str
+        The file path to which to save the video recording.
+    length : float
+        The duration of the video (in seconds).
+    fps : int
+        The number of frames/second to use.
+    """
 
     if '.avi' not in output_path:
         output_path += '.avi'
@@ -39,13 +59,13 @@ def record(output_path, length, fps):
 
 
 def parse_args():
+    """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument('output', type=str, help="Path to output video file")
     parser.add_argument('--length', '-l', type=int, default=30, help='Length of recording (in sec)')
     parser.add_argument('--fps', type=float, default=10, help='Frame per second in saved video')
 
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
