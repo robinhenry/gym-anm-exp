@@ -9,8 +9,8 @@ set_rc_params()
 FIGSIZE = (10, 4)
 
 # Path to folders containing training statistics.
-folder = '/Users/uni/Dev/gym-anm_exps/analyze_results/results/'
-agent_groups = [['sac', 'sac2'], ['ppo']]
+folder = '/Users/uni/Dev/gym-anm-exp/analyze_results/results/results_12_03_2021/'
+agent_groups = [['sac'], ['ppo']]
 
 # Load training stats.
 eval_stats = {a: [] for a in [group[0] for group in agent_groups]}
@@ -60,10 +60,11 @@ for agent, d in eval_stats.items():
     idx = np.argmax(mu)
     print(f'Best discounted return for {agent}: {mu[idx]} +/- {std[idx]}')
 
-ax.set_xlim([None, 2])
+ax.set_xlim([None, 3])
 ax.set_xlabel('Timestep (million)')
 ax.set_ylabel('Discounted return\ncomputed as in Eqn. (7)')
 ax.legend(loc='lower right', fontsize='small')
+plt.grid(True)
 
 fig.savefig('figures/discounted_return.pdf', bbox_inches='tight')
 
@@ -83,10 +84,11 @@ for agent, d in eval_stats.items():
     idx = np.argmax(mu)
     print(f'Best total return for {agent}: {mu[idx]} +/- {std[idx]}')
 
-ax.set_xlim([None, 2])
+ax.set_xlim([None, 3])
 ax.set_xlabel('Timestep (million)')
 ax.set_ylabel('Non-discounted return (T=2000)')
 ax.legend(loc='lower right')
+plt.grid(True)
 
 fig.savefig('figures/nondiscounted_return.pdf', bbox_inches='tight')
 
