@@ -20,7 +20,7 @@ import gym
 from time import time
 import argparse
 
-from gym_anm import MPCAgent, MPCAgentANM6Easy
+from gym_anm import MPCAgentConstant, MPCAgentPerfect
 
 
 # The hyperparameters to vary between different runs.
@@ -37,7 +37,7 @@ def grid_search(env_id, policy, T, seed, savefile):
     ----------
     env_id : str
         The gym environment ID.
-    policy : :py:class:`gym_anm.MPCAgent` or `gym_anm.MPCAgentANM6Easy`
+    policy : :py:class:`gym_anm.MPCAgentConstant` or `gym_anm.MPCAgentPerfect`
         The MPC policy class.
     T : int
         Total number of timesteps to use to compute the discounted return.
@@ -64,7 +64,7 @@ def run_baseline(env_id, policy, safety_margin, planning_steps, T,
     ----------
     env_id : str
         The gym environment ID.
-    policy : :py:class:`gym_anm.MPCAgent` or `gym_anm.MPCAgentANM6Easy`
+    policy : :py:class:`gym_anm.MPCAgentConstant` or `gym_anm.MPCAgentPerfect`
         The MPC policy class.
     safety_margin : float
         The safety margin hyperparameter in the MPC formulation :math:`\\beta`` in [0, 1].
@@ -138,9 +138,9 @@ if __name__ == '__main__':
     args = parse_args()
 
     if args.policy == 'constant':
-        policy = MPCAgent
+        policy = MPCAgentConstant
     elif args.policy == 'perfect':
-        policy = MPCAgentANM6Easy
+        policy = MPCAgentPerfect
     else:
         raise ValueError()
 
