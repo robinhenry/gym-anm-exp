@@ -3,9 +3,16 @@
 This repository contains the code used to obtain the experimental results presented in
 the paper introducing [`gym-anm`](https://github.com/robinhenry/gym-anm):
 ```
-Add reference to paper
+@misc{henry2021gymanm,
+      title={Gym-ANM: Reinforcement Learning Environments for Active Network Management Tasks in Electricity Distribution Systems}, 
+      author={Robin Henry and Damien Ernst},
+      year={2021},
+      eprint={2103.07932},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
 ```
-which can be accessed [here](add link).
+which can be accessed [here](https://arxiv.org/abs/2103.07932).
 
 ## Code Overview
 The code is divided into two folders: 
