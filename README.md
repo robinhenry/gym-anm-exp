@@ -15,7 +15,7 @@ the paper introducing [`gym-anm`](https://github.com/robinhenry/gym-anm):
 which can be accessed [here](https://arxiv.org/abs/2103.07932).
 
 ## Code Overview
-The code is divided into two folders: 
+The code is divided into two folders:
 - `rl_agents/` contains the code used to train RL agents,
 - `mpc_policies/` contains the code used to run the Model Predictive Control-based policies
   (for more information, see the [`gym-anm` documentation](https://gym-anm.readthedocs.io/en/latest/topics/mpc.html)).
@@ -23,7 +23,7 @@ The code is divided into two folders:
 ### Reinforcement Learning Agents
 The folder `rl_agents/` mainly contains helper functions, callbacks, and wrappers that
 were used alongside the [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) RL library:
-* `callbacks.py` contains callback functions useful for: 
+* `callbacks.py` contains callback functions useful for:
   * Displaying a progress bar (`ProgressBarCallback`), and
   * Evaluating the agent's current policy (`EvalCallback`). This is a slightly modified version
     of the [original callback](https://github.com/DLR-RM/stable-baselines3/blob/master/stable_baselines3/common/callbacks.py#L261)
@@ -41,18 +41,18 @@ were used alongside the [Stable Baselines3](https://github.com/DLR-RM/stable-bas
   * `TimeLimitWrapper` sets a maximum number of steps that can be taken in an environment before needing a reset.
 
 ### Model Predictive Control (MPC) Policies
-The script `run_mpc.py` can be used to run either the 
+The script `run_mpc.py` can be used to run either the
 [constant forecast policy](https://gym-anm.readthedocs.io/en/latest/topics/mpc.html#constant-forecast) or the
 [perfect forecast policy](https://gym-anm.readthedocs.io/en/latest/topics/mpc.html#perfect-forecast) for different
-planning steps N (optimization horizon) and safety margin hyperparameters &beta;. 
+planning steps N (optimization horizon) and safety margin hyperparameters &beta;.
 
 ## Running The Code
 
 ### Installation & Requirements
-Running the code in this repository requires `Python>=3.8` and the packages listed in `requirements.txt`, which 
+Running the code in this repository requires `Python>=3.8` and the packages listed in `pyproject.toml`, which 
 can be installed as follows:
 ```
-$ pip install -r requirements.txt
+$ pip install -e .
 ```
 
 ### RL Agents
@@ -71,14 +71,14 @@ so as to create a new directory.
 
 #### Inspecting training status
 You can get an overview of the training status of your agents by running:
-``` 
+```
 $ python -m rl_agents.view_progress
 ```
 which will print some statistics about the results saved in subfolders of `<BASE_DIR>/<ENV_ID>/`.
 
 #### Visualizing the performance of a trained agent
 You can watch a trained agent interact with the environment by running:
-``` 
+```
 $ python -m analyze_results.visualize <ALGO> -p <PATH> -s <SLEEP> -T <TIMESTEPS>
 ```
 where `<PATH>` is the path to the run folder (in the form `<BASE_DIR>/<ENV_ID>/run_<i>/`), `<SLEEP>` is
@@ -87,7 +87,7 @@ of timesteps to run.
 
 #### Recording a video of your trained agent
 You can record videos of your trained agent by running:
-``` 
+```
 $ python -m analyze_results.record_screen <PATH> -l <LENGTH> --fps <FPS>
 ```
 where `<PATH>` is the path to where you want to save the recording, `<LENGTH>` is the duration of the 
@@ -99,7 +99,7 @@ be achieved using tools like [QuickTime Player for Mac](https://libguides.rowan.
 
 ### MPC Policies
 Either MPC-based policies can be run with the following code:
-``` 
+```
 $ python -m mpc_policies.run_mpc <ENV_ID> <POLICY> -T <T> -s <SEED> -o <OUTPUT_FILE>
 ```
 where `<POLICY>` can be either `constant` or `perfect`.
