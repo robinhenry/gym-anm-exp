@@ -1,7 +1,0 @@
-gym_anm
-tqdm
-torch
-stable_baselines3
-tensorboard
-opencv-python
-pyautogui

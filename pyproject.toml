@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "gym-anm-exp"
+version = "1.0.0"
+description = "Python scripts replicating the experiments presented in the Gym-ANM paper."
+authors = [
+    "Robin Henry <robin@robinxhenry.com>",
+]
+readme = "README.md"
+repository = "https://github.com/robinhenry/gym-anm-exp"
+packages = []
+exclude = ["tests", "tests.*"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+gym-anm = "1.0.2"
+gym = "0.18.3"
+tqdm = "^4.64.1"
+torch = "1.12.1"
+stable_baselines3 = "1.1.0"
+tensorboard = "2.11.0"
+opencv-python = "4.6.0.66"
+pyautogui = "^0.9.53"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.8.0"
+mypy = "^0.981"
+
+[build-system]
+requires = ["poetry-core>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
