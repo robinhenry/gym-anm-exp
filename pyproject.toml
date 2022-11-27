@@ -12,11 +12,11 @@ exclude = ["tests", "tests.*"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-# gym-anm = "^1.1.2"
+gym-anm = "1.0.1"
 tqdm = "^4.64.1"
-torch = "^1.10.0"
-stable_baselines3 = "^1.6.2"
-tensorboard = "2.11.0"
+torch = "~1.12.1"
+stable_baselines3 = "~1.1.0"
+tensorboard = "^2.11.0"
 opencv-python = "^4.6.0.66"
 pyautogui = "^0.9.53"
 
