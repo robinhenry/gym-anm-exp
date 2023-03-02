@@ -1,0 +1,9 @@
+gym-anm == 1.0.2
+gym == 0.18.3
+tqdm == 4.64.1
+torch == 1.12.1
+stable_baselines3 == 1.1.0
+tensorboard == 2.11.0
+opencv-python == 4.6.0.66
+pyautogui == 0.9.53
+numpy == 1.19.3
