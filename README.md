@@ -49,10 +49,10 @@ planning steps N (optimization horizon) and safety margin hyperparameters &beta;
 ## Running The Code
 
 ### Installation & Requirements
-Running the code in this repository requires `Python>=3.8` and the packages listed in `pyproject.toml`, which 
-can be installed as follows:
+It is recommended to run the code in this repository on python `3.8` (later versions may work, but haven't been tested).
+The dependencies can be installed with:
 ```
-$ pip install -e .
+$ pip install -r requirements.txt
 ```
 
 ### RL Agents
